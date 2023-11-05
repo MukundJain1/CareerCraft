@@ -1,5 +1,5 @@
 
-import 'package:careercraft/src/screen/pages/user_form.dart';
+import 'package:careercraft/src/screen/pages/user_info/user_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
