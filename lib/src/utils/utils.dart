@@ -1,5 +1,3 @@
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -33,7 +31,6 @@ Widget mediumText(String text, Color color) {
         fontWeight: FontWeight.w400),
   );
 }
-
 
 Widget customText(String text, Color color, double size, FontWeight weight) {
   return Text(
@@ -72,17 +69,17 @@ Widget customButton(
             ? Border.all(
                 color: greyColor,
               )
-            : Border(),
+            : const Border(),
         boxShadow: [
           shadow == 1
-              ? BoxShadow(
+              ? const BoxShadow(
                   blurRadius: 1,
                   offset: Offset(
                     -1,
                     2,
                   ),
                 )
-              : BoxShadow(
+              : const BoxShadow(
                   blurRadius: 0,
                 ),
         ],
