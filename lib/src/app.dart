@@ -2,6 +2,7 @@
 import 'package:careercraft/src/screen/pages/user_info/user_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:careercraft/src/screen/pages/login/login.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
         );
       },
       
-      child: UserFormPage(),
+      child: LoginPage(),
     );
   }
 }

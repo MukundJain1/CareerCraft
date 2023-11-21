@@ -55,36 +55,9 @@ class _UserFormPageState extends State<UserFormPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    customButton(
-                        130,
-                        140,
-                        10,
-                        ps == 0 ? Colors.white : Colors.pink,
-                        Colors.black,
-                        "Primary \nSchooling",
-                        22,
-                        FontWeight.w700,
-                        1,
-                        0, () {
-                      setState(() {
-                        ps = 1;
-                      });
-                    }),
-                    customButton(
-                        130,
-                        140,
-                        10,
-                        ss == 0 ? Colors.white : Colors.pink,
-                        Colors.black,
-                        "Secondary \nSchooling",
-                        22,
-                        FontWeight.w700,
-                        1,
-                        0, () {
-                      setState(() {
-                        ss = 1;
-                      });
-                    }),
+                    schoolingCard("Primary", 'assets/icons/primary.png'),
+                    
+                schoolingCard("Secondary", 'assets/icons/secodary.png'),
                   ],
                 ),
                 SizedBox(
@@ -93,36 +66,8 @@ class _UserFormPageState extends State<UserFormPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    customButton(
-                        130,
-                        140,
-                        10,
-                        hs == 0 ? Colors.white : Colors.pink,
-                        Colors.black,
-                        "High \nSchooling",
-                        22,
-                        FontWeight.w700,
-                        1,
-                        0, () {
-                      setState(() {
-                        hs = 1;
-                      });
-                    }),
-                    customButton(
-                        130,
-                        140,
-                        10,
-                        its == 0 ? Colors.white : Colors.pink,
-                        Colors.black,
-                        "Intermediate \nSchooling",
-                        22,
-                        FontWeight.w700,
-                        1,
-                        0, () {
-                      setState(() {
-                        its = 1;
-                      });
-                    }),
+                    schoolingCard("Higher", 'assets/icons/higher.png'),
+                    schoolingCard("Intermediate", 'assets/icons/inter.png'),
                   ],
                 )
               ],
