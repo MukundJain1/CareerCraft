@@ -1,11 +1,14 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:careercraft/src/screen/pages/login/components/country_code.dart';
 import 'package:careercraft/src/utils/utils.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
+  static String verifyCode = "";
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -51,12 +54,13 @@ class _LoginPageState extends State<LoginPage>
       setState(() {});
     });
   }
-
   @override
   void dispose() {
     controller.dispose();
     super.dispose();
   }
+
+  String? phoneNumber1;
 
   @override
   Widget build(BuildContext context) {
@@ -165,6 +169,15 @@ class _LoginPageState extends State<LoginPage>
                           width: 220.w,
                           height: 40.0,
                           child: TextField(
+                            onChanged: (value){
+                              setState(() {
+                                phoneNumber1 = value;
+                              });
+                            },
+                            inputFormatters: [
+                              FilteringTextInputFormatter.digitsOnly,
+                              LengthLimitingTextInputFormatter(10),
+                            ],
                             keyboardType: TextInputType.number,
                             decoration: InputDecoration(
                               contentPadding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10),
@@ -182,7 +195,19 @@ class _LoginPageState extends State<LoginPage>
                     SizedBox(
                           height: 30.h,
                         ),
-                        customButton(35, 170, 20, Colors.purpleAccent.shade400, Colors.white, "Submit", 28, FontWeight.w700, 1, 1, () => null),
+                        customButton(35, 170, 20, Colors.purpleAccent.shade400, Colors.white, "Submit", 28, FontWeight.w700, 1, 1,()async{
+                          await FirebaseAuth.instance.verifyPhoneNumber(
+                            phoneNumber: '${cc! + phoneNumber1!}',
+                            verificationCompleted: (PhoneAuthCredential credential) {},
+                            verificationFailed: (FirebaseAuthException e) {},
+                            codeSent: (String verificationId, int? resendToken) {
+                              LoginPage.verifyCode = verificationId;
+                              Navigator.pushNamed(context, 'otp');
+                            },
+                            codeAutoRetrievalTimeout: (String verificationId) {},
+                          );
+
+                        }),
                         SizedBox(height: 30.h,),
                       ],
                     ),

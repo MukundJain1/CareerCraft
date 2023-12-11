@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "863104395978",
+    "project_id": "phone-number-c13c6",
+    "storage_bucket": "phone-number-c13c6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:863104395978:android:a183696f02d2442f3ae233",
+        "android_client_info": {
+          "package_name": "com.example.careercraft"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDkR2VqvQVrX3czZtnDRDTOmt74dnZRgvE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,9 +1,9 @@
 import 'package:careercraft/src/screen/pages/user_info/components/components.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../../../constant/constant.dart';
 import '../../../utils/utils.dart';
+
 
 class Class extends StatefulWidget {
   final String school;
