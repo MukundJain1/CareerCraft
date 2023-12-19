@@ -1,5 +1,7 @@
 
 import 'package:careercraft/constant/constant.dart';
+import 'package:careercraft/src/screen/pages/splash/splash.dart';
+import 'package:careercraft/src/screen/pages/user_info/education.dart';
 import 'package:careercraft/src/screen/pages/user_info/section.dart';
 import 'package:careercraft/src/screen/pages/user_info/class.dart';
 import 'package:flutter/material.dart';
@@ -20,15 +22,18 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           title: 'CareerCraft',
           theme: ThemeData(
-            primaryColor: primaryColor,
+            primaryColor: primary2,
+            secondaryHeaderColor: primary2,
+            
             
             // primarySwatch: Colors.blue,
             textTheme: Typography.englishLike2018.apply(fontSizeFactor: 1.sp),
           ),
-          initialRoute: 'login',
+          initialRoute: 'splash',
           routes: {
+            'splash': (context)=> Splash(),
             'login': (context) => LoginPage(),
-            'otp' : (context) => OTP(),
+            'otp' : (context) => OTP(mobile: "",),
             'Class' : (context) => Class(school: ""),
           },
 
@@ -36,7 +41,7 @@ class MyApp extends StatelessWidget {
         );
       },
       
-      child: LoginPage(),
+      child:Splash(),
     );
   }
 }

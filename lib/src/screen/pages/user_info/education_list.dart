@@ -8,21 +8,21 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../constant/constant.dart';
 import '../../../utils/utils.dart';
 
-class Class extends StatefulWidget {
-  final String school;
-  static String clas = "";
-  const Class({super.key, required this.school});
+class EducationList extends StatefulWidget {
+  final String education="demo";
+  const EducationList({super.key, });
 
   @override
-  State<Class> createState() => _ClassState();
+  State<EducationList> createState() => _ClassState();
 }
 
-class _ClassState extends State<Class> {
+class _ClassState extends State<EducationList> {
   int first = 0, second = 0, third = 0, fourth = 0;
   @override
+  
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBar("Class"),
+      appBar: appBar("EducationList"),
       body: SingleChildScrollView(
         child: Container(
           height: 690.h,
@@ -69,116 +69,82 @@ class _ClassState extends State<Class> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      widget.school == "primary"
+                      widget.education == "primary"
                           ? classCard("", 'assets/icons/1.png', first, () {
                               first = 1;
                               second = 0;
                               third = 0;
                               fourth = 0;
-                              Class.clas = "1";
                               setState(() {});
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => Category()));
                             })
-                          : widget.school == "secondary"
+                          : widget.education == "secondary"
                               ? classCard("", 'assets/icons/5.png', first, () {
                                   first = 1;
                                   second = 0;
                                   third = 0;
                                   fourth = 0;
-                                   Class.clas = "5";
                                   setState(() {});
                                   Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => Category()));
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Category()));
                                 })
-                              : widget.school == "higher"
+                              : widget.education == "higher"
                                   ? classCard("", 'assets/icons/9.png', first,
                                       () {
                                       first = 1;
                                       second = 0;
                                       third = 0;
                                       fourth = 0;
-                                       Class.clas = "9";
                                       setState(() {});
                                       Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  Category()));
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Category()));
                                     })
-                                  : classCard("", 'assets/icons/11.png', first,
-                                      () {
-                                      first = 1;
-                                      second = 0;
-                                      third = 0;
-                                      fourth = 0;
-                                       Class.clas = "11";
-                                      setState(() {});
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  Category()));
-                                    }),
-                      widget.school == "primary"
+                                  : Container(),
+                      widget.education == "primary"
                           ? classCard("", 'assets/icons/2.png', second, () {
                               first = 0;
                               second = 1;
                               third = 0;
                               fourth = 0;
-                               Class.clas = "2";
                               setState(() {});
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => Category()));
                             })
-                          : widget.school == "secondary"
+                          : widget.education == "secondary"
                               ? classCard("", 'assets/icons/6.png', second, () {
                                   first = 0;
                                   second = 1;
                                   third = 0;
                                   fourth = 0;
-                                   Class.clas = "6";
                                   setState(() {});
                                   Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => Category()));
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Category()));
                                 })
-                              : widget.school == "higher"
+                              : widget.education == "higher"
                                   ? classCard("", 'assets/icons/10.png', second,
                                       () {
                                       first = 0;
                                       second = 1;
                                       third = 0;
                                       fourth = 0;
-                                       Class.clas = "10";
                                       setState(() {});
                                       Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  Category()));
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Category()));
                                     })
-                                  : classCard("", 'assets/icons/12.png', second,
-                                      () {
-                                      first = 0;
-                                      second = 1;
-                                      third = 0;
-                                      fourth = 0;
-                                       Class.clas = "12";
-                                      setState(() {});
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  Category()));
-                                    }),
+                                  : Container(),
                     ],
                   ),
                 ),
@@ -190,58 +156,54 @@ class _ClassState extends State<Class> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      widget.school == "primary"
+                      widget.education == "primary"
                           ? classCard("", 'assets/icons/3.png', third, () {
                               first = 0;
                               second = 0;
                               third = 1;
                               fourth = 0;
-                               Class.clas = "3";
                               setState(() {});
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => Category()));
                             })
-                          : widget.school == "secondary"
+                          : widget.education == "secondary"
                               ? classCard("", 'assets/icons/7.png', third, () {
                                   first = 0;
                                   second = 0;
                                   third = 1;
                                   fourth = 0;
-                                   Class.clas = "7";
                                   setState(() {});
                                   Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => Category()));
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Category()));
                                 })
                               : Container(),
-                      widget.school == "primary"
+                      widget.education == "primary"
                           ? classCard("", 'assets/icons/4.png', fourth, () {
                               first = 0;
                               second = 0;
                               third = 0;
                               fourth = 1;
-                               Class.clas = "4";
                               setState(() {});
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => Category()));
                             })
-                          : widget.school == "secondary"
+                          : widget.education == "secondary"
                               ? classCard("", 'assets/icons/8.png', fourth, () {
                                   first = 0;
                                   second = 0;
                                   third = 0;
                                   fourth = 1;
-                                  Class.clas = "8";
                                   setState(() {});
                                   Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => Category()));
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Category()));
                                 })
                               : Container(),
                     ],
