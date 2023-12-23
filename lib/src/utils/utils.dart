@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import '../../constant/constant.dart';
 
@@ -97,3 +98,14 @@ Widget customButton(
     ),
   );
 }
+
+dynamic showToast(String title) =>
+Fluttertoast.showToast(
+        msg: title,
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.pink,
+        textColor: Colors.white,
+        fontSize: 16.0
+    );

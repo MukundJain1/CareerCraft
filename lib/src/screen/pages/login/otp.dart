@@ -1,13 +1,18 @@
+import 'package:careercraft/constant/constant.dart';
+import 'package:careercraft/src/screen/home/home.dart';
 import 'package:careercraft/src/screen/pages/login/login.dart';
+import 'package:careercraft/src/utils/utils.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
+import '../../../service/service.dart';
+import '../../../utils/customWidget.dart';
 import '../user_info/section.dart';
 
-
 class OTP extends StatefulWidget {
-  const OTP({super.key});
-
+  final String mobile;
+  OTP({super.key, required this.mobile});
 
   @override
   State<OTP> createState() => _OTPState();
@@ -21,11 +26,12 @@ class _OTPState extends State<OTP> {
     final defaultPinTheme = PinTheme(
       width: 56,
       height: 60,
-      textStyle: TextStyle(fontSize: 30, color:Colors.black, fontWeight: FontWeight.w600),
+      textStyle: const TextStyle(
+          fontSize: 30, color: Colors.black, fontWeight: FontWeight.w600),
       decoration: BoxDecoration(
-        color: Color(0xFFE5D4FF),
+        color: const Color(0xFFE5D4FF),
         borderRadius: BorderRadius.circular(20),
-        boxShadow: [
+        boxShadow: const [
           BoxShadow(
             color: Color.fromRGBO(234, 239, 243, 1),
             blurRadius: 5.0,
@@ -50,146 +56,170 @@ class _OTPState extends State<OTP> {
     // );
 
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            SizedBox(
-              height: 350,
-              child:Image.asset('assets/icons/otp4.jpg'),),
-            SizedBox(
-              height: 40,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 23),
-              child: Text(
-                "Enter Verification Code",
-                style: TextStyle(
-
+        body: SingleChildScrollView(
+      child: Column(
+        children: [
+          SizedBox(
+            height: 350,
+            width: double.infinity,
+            child: Image.asset('assets/icons/otp4.jpg'),
+          ),
+          const SizedBox(
+            height: 40,
+          ),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 23),
+            child: Text(
+              "Enter Verification Code",
+              style: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: Colors.black,
-                  fontSize: 25
-                ),
+                  fontSize: 25),
+            ),
+          ),
+          const SizedBox(
+            height: 7,
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 23),
+            child: Text(
+              "SMS send to your mobile number ${LoginPage.mobile}",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontWeight: FontWeight.w500,
+                color: Colors.black54,
+                fontSize: 15,
               ),
             ),
-            SizedBox(
-              height: 7,
+          ),
+          const SizedBox(
+            height: 40,
+          ),
+          SizedBox(
+            height: 68,
+            // PinPut
+    width: 300,
+            child: Pinput(
+              defaultPinTheme: defaultPinTheme,
+              length: 6,
+              showCursor: true,
+              onChanged: (value) {
+                smsCode = value;
+              },
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 23),
-              child: Text(
-                "We are automatically detecting a SMS send to your mobile number ****81",
-                textAlign: TextAlign.center,
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          Align(
+            alignment: Alignment.center,
+            child: RichText(
+              text: const TextSpan(
                 style: TextStyle(
-                    fontWeight: FontWeight.w500,
-                    color: Colors.black54,
-                    fontSize: 15,
+                  fontSize: 14.0,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
                 ),
-              ),
-            ),
-            SizedBox(
-              height: 40,
-            ),
-            SizedBox(
-              height: 68,
-              // PinPut
-
-              child:Pinput(
-                defaultPinTheme: defaultPinTheme,
-                length: 6,
-                showCursor: true,
-                onChanged: (value){
-                  smsCode = value;
-                },
-              ),
-            ),
-        SizedBox(
-          height: 10,
-        ),
-        Align(
-              alignment: Alignment.center,
-              child: RichText(
-                text: TextSpan(
-                  style: TextStyle(
-                    fontSize: 14.0,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
+                children: [
+                  TextSpan(
+                    text: "Didn't receive OTP? ",
                   ),
-                  children: [
-                    TextSpan(
-                      text: "Didn't receive OTP? ",
+                  TextSpan(
+                    text: "Send again!",
+                    style: TextStyle(
+                      color: Color(0xFF1640D6),
+                      // Change this to your desired color
                     ),
-                    TextSpan(
-                      text: "Send again!",
-                      style: TextStyle(
-                          color: Color(0xFF1640D6),
-                        // Change this to your desired color
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
-            SizedBox(height: 60.0),
-            Align(
-              alignment: Alignment.center,
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
-                child: SizedBox(
-                  width: 150,
-                  height: 60,
-                  child: ElevatedButton(
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(Colors.pink),
-                      shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(20.0),
-                          topRight: Radius.circular(20.0),
-                          bottomLeft: Radius.circular(20.0),
-                          bottomRight: Radius.circular(20.0),
-                        ),
-                      )),
-                      padding: MaterialStateProperty.all(
-                        EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
+          ),
+          const SizedBox(height: 60.0),
+          Align(
+            alignment: Alignment.center,
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
+              child: SizedBox(
+                width: 150,
+                height: 60,
+                child: ElevatedButton(
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(primary2),
+                    shape:
+                        MaterialStateProperty.all(const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(20.0),
+                        topRight: Radius.circular(20.0),
+                        bottomLeft: Radius.circular(20.0),
+                        bottomRight: Radius.circular(20.0),
                       ),
+                    )),
+                    padding: MaterialStateProperty.all(
+                      const EdgeInsets.symmetric(
+                          horizontal: 20.0, vertical: 20.0),
                     ),
-                    onPressed: () async{
-                      // Verify the verification code and navigate to the next screen.
-                      try {
-                        if (LoginPage.verifyCode != null) {
-                          PhoneAuthCredential credential = PhoneAuthProvider.credential(
-                            verificationId: LoginPage.verifyCode,
-                            smsCode: smsCode,
-                          );
-                          await auth.signInWithCredential(credential);
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=>UserFormPage()));
-                        } else {
-                          // Handle the case when verification code is null
-                          print('Verification code is null');
-                        }
-                      } catch (e) {
-                        print('Wrong OTP: $e');
-                        // Handle the case of wrong OTP
+                  ),
+                  onPressed: () async {
+                    // Verify the verification code and navigate to the next screen.
+                    CustomWidget().showProgress(context: context);
+                    try {
+                      if (LoginPage.verify != null) {
+                        PhoneAuthCredential credential =
+                            PhoneAuthProvider.credential(
+                          verificationId: LoginPage.verify,
+                          smsCode: smsCode,
+                        );
+                        await auth
+                            .signInWithCredential(credential)
+                            .whenComplete(() =>
+                                CustomWidget().hidProgress(context: context)).onError((error, stackTrace) => showToast(error.toString()));
+                        await UserDatabaseManager()
+                                .doesUserAlreadyExist(LoginPage.mobile)
+                            ? {
+                                UserDatabaseManager().setLoginTrue(),
+                                UserDatabaseManager()
+                                    .setPhoneNumber(widget.mobile),
+                                Navigator.of(context).pushAndRemoveUntil(
+                                    MaterialPageRoute(
+                                        builder: (context) => const HomePage()),
+                                    (Route<dynamic> route) => false)
+                              }
+                            : {
+                                // ignore: use_build_context_synchronously
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const UserFormPage())),
+                              };
+                      } else {
+                        // Handle the case when verification code is null
+                        print('Verification code is null');
                       }
-                    },
-                    child: Row(
-                      children: [
-                        Text(
-                          'Continue',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(fontSize: 17.0),
-                        ),
-                        SizedBox(width:4.0),
-                        Icon(Icons.arrow_forward_ios, size: 16.0),
-                      ],
-                    ),
+                    } catch (e) {
+                      print('Wrong OTP: $e');
+                      // Handle the case of wrong OTP
+                    }
+                  },
+                  child: const Row(
+                    children: [
+                      Text(
+                        'Continue',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 17.0),
+                      ),
+                      SizedBox(width: 4.0),
+                      Icon(Icons.arrow_forward_ios, size: 16.0),
+                    ],
                   ),
                 ),
               ),
             ),
-          ],
-        ),
-      )
-    );
+          ),
+        ],
+      ),
+    ));
   }
 }
 
