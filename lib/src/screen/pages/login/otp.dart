@@ -182,7 +182,7 @@ class _OTPState extends State<OTP> {
                                     .setPhoneNumber(widget.mobile),
                                 Navigator.of(context).pushAndRemoveUntil(
                                     MaterialPageRoute(
-                                        builder: (context) => const HomePage()),
+                                        builder: (context) => const HomePage(index: 0,)),
                                     (Route<dynamic> route) => false)
                               }
                             : {

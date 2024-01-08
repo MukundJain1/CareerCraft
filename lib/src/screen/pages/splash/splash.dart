@@ -31,7 +31,7 @@ class _SplashState extends State<Splash> {
         ? {
             // ignore: use_build_context_synchronously
             Navigator.pushReplacement(
-                context, MaterialPageRoute(builder: (context) => HomePage()))
+                context, MaterialPageRoute(builder: (context) => HomePage(index: 0,)))
           }
         : Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => LoginPage()));

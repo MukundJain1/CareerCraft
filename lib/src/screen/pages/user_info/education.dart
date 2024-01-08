@@ -562,7 +562,7 @@ class _EducationPageState extends State<EducationPage> {
                                               .pushAndRemoveUntil(
                                                   MaterialPageRoute(
                                                       builder: (context) =>
-                                                         const HomePage()),
+                                                         const HomePage(index: 0,)),
                                                   (Route<dynamic> route) =>
                                                       false);
                     }),

@@ -1,11 +1,17 @@
 import 'package:careercraft/src/screen/home/home.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../utils/customWidget.dart';
 
 class UserDatabaseManager {
+  final FirebaseAuth auth = FirebaseAuth.instance;
+  Future<void> signOut() {
+    return auth.signOut();
+  }
+
   Future<void> submitInterest(
     String mobile,
     String section,
@@ -33,7 +39,10 @@ class UserDatabaseManager {
       CustomWidget().hidProgress(context: context);
 
       Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(builder: (context) => HomePage()),
+        MaterialPageRoute(
+            builder: (context) => HomePage(
+                  index: 0,
+                )),
         (Route<dynamic> route) => false,
       );
     } catch (error) {
@@ -42,47 +51,48 @@ class UserDatabaseManager {
   }
 
   Future<bool> doesUserAlreadyExist(String name) async {
-  print(name);
-  final QuerySnapshot result = await FirebaseFirestore.instance
-      .collection('user_interest')
-      .where('mobile', isEqualTo: name)
-      .limit(1)
-      .get();
-  final List<DocumentSnapshot> documents = result.docs;
-  //print(result.docs);
-  return documents.length == 1;
-}
+    print(name);
+    final QuerySnapshot result = await FirebaseFirestore.instance
+        .collection('user_interest')
+        .where('mobile', isEqualTo: name)
+        .limit(1)
+        .get();
+    final List<DocumentSnapshot> documents = result.docs;
+    //print(result.docs);
+    return documents.length == 1;
+  }
 
-clearSavedData() async {
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  await prefs.clear();
-}
-setLoginTrue() async {
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  await prefs.setBool("isLogin", true);
-}
+  clearSavedData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.clear();
+  }
 
-setPhoneNumber(String mobile) async {
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  await prefs.setString("phone", mobile);
-}
-  // final CollectionReference doctorList =
-  //     FirebaseFirestore.instance.collection('doctors');
+  setLoginTrue() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool("isLogin", true);
+  }
 
-  // Future getUserList(String phoneNumber) async {
-  //   List itemsList = [];
-  //   try {
-  //     await doctorList.where('mobile', isEqualTo: phoneNumber).get().then((querySnapshot) {
-  //       querySnapshot.docs.forEach((element) {
-  //         itemsList.add(element.data());
-  //       });
-  //     });
-  //     return itemsList;
-  //   } catch (e) {
-  //     print(e.toString());
-  //     return null;
-  //   }
-  // }
+  setPhoneNumber(String mobile) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString("phone", mobile);
+  }
+final CollectionReference expertList =
+      FirebaseFirestore.instance.collection('expert');
+
+  Future getExpertList() async {
+    List itemsList = [];
+    try {
+      await expertList.get().then((querySnapshot) {
+        querySnapshot.docs.forEach((element) {
+          itemsList.add(element.data());
+        });
+      });
+      return itemsList;
+    } catch (e) {
+      print(e.toString());
+      return null;
+    }
+  }
 
   // final CollectionReference appointmentList =
   //     FirebaseFirestore.instance.collection('appointments');
