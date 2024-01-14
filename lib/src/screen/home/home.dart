@@ -2,7 +2,8 @@ import 'package:careercraft/constant/constant.dart';
 import 'package:careercraft/src/screen/career/career.dart';
 import 'package:careercraft/src/screen/community/community.dart';
 import 'package:careercraft/src/screen/counsellor/counsellor.dart';
-import 'package:careercraft/src/screen/news/news.dart';
+import 'package:careercraft/src/screen/news/view/splash_screen.dart';
+
 import 'package:careercraft/src/screen/user/user.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -35,7 +36,7 @@ class HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     List<Widget> bodyList = [
       CareerPage(),
-      NewsPage(),
+      SplashScreen(),
       CommunityPage(),
       Counsellor(),
       UserPage(),
@@ -82,7 +83,7 @@ class HomePageState extends State<HomePage> {
             curve: Curves.ease,
             duration: Duration(milliseconds: 200),
           ),
-          navBarStyle: NavBarStyle.style9),
+          navBarStyle: NavBarStyle.style14),
     );
   }
 }
@@ -93,31 +94,31 @@ List<PersistentBottomNavBarItem> _navBarsItems(BuildContext context) {
       icon: Icon(Icons.home_rounded),
       title: "Home",
       activeColorPrimary: primary2,
-      inactiveColorPrimary: greyColor,
+      inactiveColorPrimary: primary3,
     ),
     PersistentBottomNavBarItem(
       icon: Icon(Icons.newspaper_outlined),
       title: "News",
       activeColorPrimary:  primary2,
-      inactiveColorPrimary: greyColor,
+      inactiveColorPrimary: primary3,
     ),
     PersistentBottomNavBarItem(
       icon: Icon(Icons.comment),
       title: "Community",
       activeColorPrimary:  primary2,
-      inactiveColorPrimary: greyColor,
+      inactiveColorPrimary: primary3,
     ),
     PersistentBottomNavBarItem(
       icon: Icon(CupertinoIcons.person_2),
       title: "Counsellor",
       activeColorPrimary:  primary2,
-      inactiveColorPrimary: greyColor,
+      inactiveColorPrimary: primary3,
     ),
     PersistentBottomNavBarItem(
       icon: Icon(CupertinoIcons.person),
       title: "User",
       activeColorPrimary:  primary2,
-      inactiveColorPrimary: greyColor,
+      inactiveColorPrimary: primary3,
     ),
   ];
 }
